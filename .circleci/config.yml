@@ -49,7 +49,7 @@ workflows:
       # Run the welcome/run job in its own container
     jobs:
       #- create_infrastructure
-      - configure_infrastructures
+      - configure_infrastructure
           #requires:
             #- create_infrastructure
       
