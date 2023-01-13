@@ -1,0 +1,55 @@
+# This config is equivalent to both the '.circleci/extended/orb-free.yml' and the base '.circleci/config.yml'
+version: 2.1
+orbs:
+  # Choose either one of the orbs below
+  # Declare a dependency on the welcome-orb
+  # welcome: circleci/welcome-orb@0.4.1
+  aws-cli: circleci/aws-cli@2.0.3
+# Orchestrate or schedule a set of jobs
+
+#orchestrate or Schedule sets of jobs
+jobs:
+  create_infrastructure: 
+    docker:
+      - image: amazon/aws-cli
+    steps:
+      - checkout
+      - run:
+          name: Create Cloudformation Stack
+          command: |
+            aws cloudformation deploy \
+              --template-file infra-template.yml \
+              --stack-name samnzay-stack-${CIRCLE_WORKFLOW_ID:0:5} \
+              --region us-east-1
+
+  configure_infrastructure:
+    docker:
+      - image: python:3.7-alpine3.11
+    steps:
+      - checkout
+      - add_ssh_keys:
+          fingerprints: ["aa:9e:d7:78:55:1d:f8:73:04:f3:d7:d7:a3:b5:7c:41"]
+      - run:
+          name: Install dependancies
+          command: |
+            apk add --update ansible # install ansible dependencies
+      
+      - run: 
+          name: Configure server
+          command: |
+            ansible-playbook -i inventory main-remote.yml
+            
+          
+  
+# Invoke jobs via workflows
+# See: https://circleci.com/docs/2.0/configuration-reference/#workflows
+workflows:
+  # Name the workflow "welcome"
+  welcome:
+      # Run the welcome/run job in its own container
+    jobs:
+      - create_infrastructure
+      - configure_infrastructure:
+          requires:
+            - create_infrastructure
+      
