@@ -24,11 +24,11 @@ jobs:
 
   configure_infrastructure:
     docker:
-      - image: python:3.7-alpine3.11
+      - image: python:3.9.16-alpine3.17
     steps:
       - checkout
       - add_ssh_keys:
-          fingerprints: ["aa:9e:d7:78:55:1d:f8:73:04:f3:d7:d7:a3:b5:7c:41"]
+          fingerprints: ["e1:e2:30:0c:61:c4:50:90:a3:6c:23:5a:72:0e:8d:2c"]
       - run:
           name: Install dependencies
           command: |
@@ -48,8 +48,8 @@ workflows:
   infrastructure:
       # Run the welcome/run job in its own container
     jobs:
-      #- create_infrastructure
-      - configure_infrastructure
+      - create_infrastructure
+      #- configure_infrastructure
           #requires:
             #- create_infrastructure
       
