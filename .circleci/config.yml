@@ -5,7 +5,16 @@ orbs:
   # Declare a dependency on the welcome-orb
   # welcome: circleci/welcome-orb@0.4.1
   aws-cli: circleci/aws-cli@2.0.3
-# Orchestrate or schedule a set of jobs
+
+
+commands:
+  destroy_environment:
+    steps:
+      - run: 
+          name: Destroy Envvironment
+          command: |
+            aws cloudformation delete-stack --stack-name samnzay-stack-${CIRCLE_WORKFLOW_ID:0:7}
+  
 
 #orchestrate or Schedule sets of jobs
 jobs:
@@ -41,28 +50,18 @@ jobs:
 
   SmokeTest:
     docker:
-      - image: alpine:latest
+      - image: amazon/aws-cli
     
     steps:
-      - run: apk add --update curl
+      - checkout
       - run:
           name: smoke test
-          command: |
-            URL="https://blog.udacity.com/"
-            # Test if website exists
-            
-            if curl -s --head ${URL} 
-            then
-              return 0
-            else
-              return 1
-            fi
+          # fail the command intentionally
+          command: return 1
+
+      - destroy_environment
 
 
-
-            
-          
-  
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
 workflows:
@@ -70,7 +69,7 @@ workflows:
   infrastructure:
       # Run the welcome/run job in its own container
     jobs:
-      #- create_infrastructure
+      - create_infrastructure
       #- configure_infrastructure
           #requires:
             #- create_infrastructure
