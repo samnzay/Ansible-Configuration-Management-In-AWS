@@ -1,8 +1,9 @@
 ---
 - name: "Deploying Infarastructure & setting up a web server in an EC2"
   hosts: all
-  
+
   user: ubuntu
+  gather_facts: no
   become: true
   become_method: sudo
   become_user: root
