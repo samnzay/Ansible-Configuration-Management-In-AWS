@@ -1,7 +1,7 @@
 ---
 - name: "Deploying Infarastructure & setting up a web server in an EC2"
   hosts: all
-  ignore_unreachable: true
+  
   user: ubuntu
   become: true
   become_method: sudo
