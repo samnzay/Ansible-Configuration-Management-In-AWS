@@ -74,5 +74,6 @@ workflows:
           #requires:
             #- create_infrastructure
 
-      - SmokeTest
+      - SmokeTest:
+          when: on_fail
       
