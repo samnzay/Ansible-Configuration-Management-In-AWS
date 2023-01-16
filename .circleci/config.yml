@@ -32,7 +32,7 @@ jobs:
       - run:
           name: Install dependencies
           command: |
-            apk add --update ansible # install ansible dependencies
+            #apk add --update ansible # install ansible dependencies
             pip install ansible
       
       - run: 
