@@ -30,7 +30,7 @@ jobs:
       - add_ssh_keys:
           fingerprints: ["aa:9e:d7:78:55:1d:f8:73:04:f3:d7:d7:a3:b5:7c:41"]
       - run:
-          name: Install dependancies
+          name: Install dependencies
           command: |
             apk add --update ansible # install ansible dependencies
       
@@ -48,8 +48,8 @@ workflows:
   welcome:
       # Run the welcome/run job in its own container
     jobs:
-      #- create_infrastructure
-      - configure_infrastructure
+      - create_infrastructure
+      #- configure_infrastructure
           #requires:
             #- create_infrastructure
       
