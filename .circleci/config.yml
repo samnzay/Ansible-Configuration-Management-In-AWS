@@ -33,6 +33,7 @@ jobs:
           name: Install dependencies
           command: |
             apk add --update ansible # install ansible dependencies
+            pip freeze |grep ansible ansible==2.4.2.0
       
       - run: 
           name: Configure server
