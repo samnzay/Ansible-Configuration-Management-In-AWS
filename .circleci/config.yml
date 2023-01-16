@@ -1,5 +1,5 @@
 # This config is equivalent to both the '.circleci/extended/orb-free.yml' and the base '.circleci/config.yml'
-version: 2
+version: 2.1
 orbs:
   # Choose either one of the orbs below
   # Declare a dependency on the welcome-orb
@@ -37,7 +37,7 @@ jobs:
       - run: 
           name: Configure server
           command: |
-            ansible-playbook --user=ubuntu -vvvv -i inventory main-remote.yml
+            ansible-playbook --user=ubuntu -vvvv -i inventory main-remote.yml -c paramiko
             
           
   
