@@ -24,7 +24,7 @@ jobs:
 
   configure_infrastructure:
     docker:
-      - image: amazon/aws-cli
+      - image: python:3.7-alpine3.11
     steps:
       - checkout
       - add_ssh_keys:
@@ -32,15 +32,12 @@ jobs:
       - run:
           name: Install dependencies
           command: |
-            #apk add --update ansible # install ansible dependencies
-            apt-add-repository ppa:ansible/ansible
-            apt update
-            apt install ansible
+            apk add --update ansible # install ansible dependencies
       
       - run: 
           name: Configure server
           command: |
-            ansible-playbook --user=ubuntu -vvvv -i inventory main-remote.yml -c paramiko
+            ansible-playbook --user=ubuntu -vvvv -i inventory main-remote.yml
             
           
   
