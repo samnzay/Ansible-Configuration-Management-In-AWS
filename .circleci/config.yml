@@ -49,7 +49,7 @@ jobs:
           name: smoke test
           command: |
             URL= "www.google.com/"
-            #Test if a website exist
+            # Test if a website exist
 
             if curl -s --head ${URL}
             then
