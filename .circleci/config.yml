@@ -32,7 +32,7 @@ jobs:
       - run:
           name: Install dependencies
           command: |
-            apk add --update ansible # install ansible dependencies
+            apk add --update ansible
       
       - run: 
           name: Configure server
@@ -48,8 +48,8 @@ workflows:
   infrastructure:
       # Run the welcome/run job in its own container
     jobs:
-      - create_infrastructure
-      #- configure_infrastructure
+      #- create_infrastructure
+      - configure_infrastructure
           #requires:
             #- create_infrastructure
       
