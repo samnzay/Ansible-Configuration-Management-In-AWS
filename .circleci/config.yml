@@ -14,6 +14,7 @@ commands:
           name: Destroy Envvironment
           command: |
             aws cloudformation delete-stack --stack-name samnzay-stack-${CIRCLE_WORKFLOW_ID:0:7}
+          when: on_fail
   
 
 #orchestrate or Schedule sets of jobs
@@ -74,6 +75,6 @@ workflows:
           #requires:
             #- create_infrastructure
 
-      - SmokeTest:
-          when: on_fail
+      - SmokeTest
+        
       
