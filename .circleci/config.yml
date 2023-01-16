@@ -33,7 +33,7 @@ jobs:
           name: Install dependencies
           command: |
             #apk add --update ansible # install ansible dependencies
-            pip install ansible
+            python3 -m pip install --user ansible
       
       - run: 
           name: Configure server
