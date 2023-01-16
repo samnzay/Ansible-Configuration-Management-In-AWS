@@ -37,7 +37,7 @@ jobs:
       - run: 
           name: Configure server
           command: |
-            ansible-playbook --user=ubuntu -vvvv -i inventory main-remote.yml -c paramiko
+            ansible-playbook --user=ubuntu -vvvv -i inventory main-remote.yml -m ping -c paramiko
             
           
   
