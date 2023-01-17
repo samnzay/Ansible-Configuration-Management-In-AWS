@@ -91,7 +91,7 @@ jobs:
             --stack-name stack-create-bucket-${CIRCLE_WORKFLOW_ID:0:7} \
             --parameter-overrides MyBucketName="mybucket-${CIRCLE_WORKFLOW_ID:0:7}" \
 
-      - run: aws s3 sync . s3://mybucket-${CIRCLE_WORKFLOW_ID:0:7} --delete
+      - run: aws s3 sync web/ s3://mybucket-${CIRCLE_WORKFLOW_ID:0:7} --delete
   
   #Write a CircleCI job named get_last_deployment_id that performs 
   #the query and saves the id to a file that we can persist to the workspace.
