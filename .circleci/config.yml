@@ -153,9 +153,9 @@ jobs:
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
 workflows:
   # Name the workflow "infrastructure"
-  infrastructure:
+  #infrastructure:
       # Run the welcome/run job in its own container
-    jobs:
+    #jobs:
       #- create_infrastructure
       #- configure_infrastructure
           #requires:
